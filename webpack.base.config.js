@@ -7,13 +7,18 @@ const isProd = ENV === "production";
 const isDev = ENV === "development";
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const basePath = process.cwd();
+const basePath = __dirname;
 
-const resolve = (pat) => path.resolve(basePath, pat)
+const resolve = (pat) => path.resolve(basePath, pat);
+
+// Get short commit hash from git
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
+const gitRevisionPlugin = new GitRevisionPlugin();
+const shortCommitHash = gitRevisionPlugin.commithash().substring(0,8);
 
 module.exports = {
   devtool: "eval",
-
+  
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
@@ -94,7 +99,7 @@ module.exports = {
             loader: "typings-for-css-modules-loader",
             options: {
               camelCase: true,
-              localIdentName: "[name]__[local]___[hash:base64:5]",
+              localIdentName: "[name]__[local]___"+shortCommitHash,
               minimize: isProd,
               modules: true,
               namedExport: true,

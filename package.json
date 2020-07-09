@@ -53,8 +53,8 @@
   },
   "scripts": {
     "analyze": "NODE_ENV=production NETWORK=main ANALYZE=1 node --max_old_space_size=4096 node_modules/.bin/webpack --config webpack.prod.config.js --progress --colors",
-    "build": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
-    "build-dev": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.dev.config.js",
+    "build": "rm -rif dist && node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.prod.config.js",
+    "build-dev": "rm -rif dist && node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --config webpack.dev.config.js",
     "fetch-contracts": "cross-env NODE_ENV=production ./node_modules/.bin/ts-node scripts/fetchContracts.ts",
     "lint": "eslint --ext .js,.ts,.tsx ./src ./test",
     "lint-andFix": "npm run lint -- --fix",
@@ -188,6 +188,7 @@
     "eslint": "^6.4.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-react": "^7.14.3",
+    "git-revision-webpack-plugin": "^3.0.6",
     "html-webpack-plugin": "^3.0.6",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
