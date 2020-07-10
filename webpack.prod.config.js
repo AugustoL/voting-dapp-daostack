@@ -21,7 +21,7 @@ const config = merge(baseConfig, {
 
   entry: {
     // the entry point of our app
-    app: __dirname + "/src/index.tsx",
+    app: "./src/index.tsx",
     // "ipfs-http-client": ["ipfs-http-client"],
     // "@daostack/migration": ["@daostack/migration/"]
   },
@@ -29,8 +29,13 @@ const config = merge(baseConfig, {
   output: {
     filename: "[name].bundle-"+shortCommitHash+".js",
     chunkFilename: "[name].bundle-"+shortCommitHash+".js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.join(__dirname+"/dist"),
+
     publicPath: "",
+  },
+  
+  node: {
+    __dirname: false
   },
 
   optimization: {

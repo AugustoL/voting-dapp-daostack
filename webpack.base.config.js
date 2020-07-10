@@ -7,7 +7,7 @@ const isProd = ENV === "production";
 const isDev = ENV === "development";
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const basePath = __dirname;
+const basePath = "";
 
 const resolve = (pat) => path.resolve(basePath, pat);
 
