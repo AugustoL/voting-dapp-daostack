@@ -21,6 +21,7 @@ import DaoHistoryPage from "./DaoHistoryPage";
 import DaoMembersPage from "./DaoMembersPage";
 import * as css from "./Dao.scss";
 import DaoLandingPage from "components/Dao/DaoLandingPage";
+import DaoManifestoPage from "components/Dao/DaoManifestoPage";
 
 type IExternalProps = RouteComponentProps<any>;
 
@@ -79,6 +80,7 @@ class DaoContainer extends React.Component<IProps, null> {
   private schemeRoute = (routeProps: any) => <SchemeContainer {...routeProps} daoState={this.props.data[0]} currentAccountAddress={this.props.currentAccountAddress} />;
   private daoSchemesRoute = (routeProps: any) => <DaoSchemesPage {...routeProps} daoState={this.props.data[0]} />;
   private daoLandingRoute = (_routeProps: any) => <DaoLandingPage daoState={this.props.data[0]} />;
+  private daoManifestoRoute = (_routeProps: any) => <DaoManifestoPage />;
   private createProposalRoute = (routeProps: any) => <CreateProposalPage {...routeProps} daoState={this.props.data[0]} />;
 
   public render(): RenderOutput {
@@ -105,6 +107,8 @@ class DaoContainer extends React.Component<IProps, null> {
           <Switch>
             <Route exact path="/dao"
               render={this.daoLandingRoute} />
+            <Route exact path="/dao/manifesto"
+              render={this.daoManifestoRoute} />
             <Route exact path="/dao/history"
               render={this.daoHistoryRoute} />
             <Route exact path="/dao/members"

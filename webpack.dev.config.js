@@ -29,19 +29,8 @@ module.exports = merge(baseConfig, {
   },
 
   entry: [
-    // activate HMR for React
-    'react-hot-loader/patch',
-
-    // bundle the client for webpack-dev-server
-    // and connect to the provided endpoint
-    'webpack-dev-server/client?http://127.0.0.1:3000',
-
-    // bundle the client for hot reloading
-    // only- means to only hot reload for successful updates
-    'webpack/hot/only-dev-server',
-
     // the entry point of our app
-    __dirname + '/src/index.tsx',
+    'src/index.tsx',
   ],
 
   module: {
@@ -88,9 +77,9 @@ module.exports = merge(baseConfig, {
     new webpack.NamedModulesPlugin(),
 
     new webpack.EnvironmentPlugin({
-      NETWORK: "ganache",
+      NETWORK: "main",
       NODE_ENV: "development",
-      BASE_URL: "http://127.0.0.1:3000",
+      BASE_URL: "",
       ARC_GRAPHQLHTTPPROVIDER: "",
       ARC_GRAPHQLWSPROVIDER : "",
       ARC_WEB3PROVIDER : "",
@@ -101,7 +90,7 @@ module.exports = merge(baseConfig, {
       ARC_IPFSPROVIDER_PROTOCOL : "",
       ARC_IPFSPROVIDER_API_PATH : "",
       INFURA_ID : "",
-      DAO_AVATAR_ADDRESS: "0x86e9fe552e75e4fc51f46e4efc128628ecd5ada7",
+      DAO_AVATAR_ADDRESS: "0x519b70055af55a007110b4ff99b0ea33071c720a",
       DAO_CONTROLLER_ADDRESS: "0x9f828ac3baa9003e8a4e0b24bcae7b027b6740b0"
     })
   ]

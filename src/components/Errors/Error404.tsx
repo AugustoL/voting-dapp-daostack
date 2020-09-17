@@ -2,7 +2,6 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import * as appCss from "../../layouts/App.scss";
 import * as css from "./Errors.scss";
-import daoConfig from "../../DAOConfig";
 
 export default class Error404 extends React.PureComponent {
 
@@ -21,7 +20,7 @@ export default class Error404 extends React.PureComponent {
             <div className={appCss.menu}>
               <Link to="/"><img src="assets/images/DXD.svg"/></Link>
             </div>
-            <div className={appCss.topInfo}>{daoConfig.daoName}</div>
+            <div className={appCss.topInfo}>DXdao</div>
           </div>
         </nav>
         <div className={css.content}>

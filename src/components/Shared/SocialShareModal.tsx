@@ -60,10 +60,10 @@ export default class SocialShareModal extends React.Component<IProps, null> {
           <CopyToClipboard value={this.props.url} tooltipPlacement="right" />
         </div>}
         footer={<div className={css.socialSitesList}>
-          <div onClick={this.selectTwitter} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/twitter.svg"} /></div><div className={css.name}>Twitter</div></div>
-          <div onClick={this.selectReddit} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/reddit.svg"} /></div><div className={css.name}>Reddit</div></div>
-          <div onClick={this.selectFacebook} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/facebook.svg"} /></div><div className={css.name}>Facebook</div></div>
-          <div onClick={this.selectTelegram} className={css.socialSite}><div className={css.icon}><img src={"/assets/images/Icon/social/telegram.svg"} /></div><div className={css.name}>Telegram</div></div>
+          <div onClick={this.selectTwitter} className={css.socialSite}><div className={css.icon}><img src={"assets/images/Icon/social/twitter.svg"} /></div><div className={css.name}>Twitter</div></div>
+          <div onClick={this.selectReddit} className={css.socialSite}><div className={css.icon}><img src={"assets/images/Icon/social/reddit.svg"} /></div><div className={css.name}>Reddit</div></div>
+          <div onClick={this.selectFacebook} className={css.socialSite}><div className={css.icon}><img src={"assets/images/Icon/social/facebook.svg"} /></div><div className={css.name}>Facebook</div></div>
+          <div onClick={this.selectTelegram} className={css.socialSite}><div className={css.icon}><img src={"assets/images/Icon/social/telegram.svg"} /></div><div className={css.name}>Telegram</div></div>
         </div>}
       />
     );

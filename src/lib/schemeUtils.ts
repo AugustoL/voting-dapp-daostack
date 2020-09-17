@@ -3,8 +3,6 @@ import {
   Address,
   IContractInfo,
   ISchemeState} from "@daostack/arc.js";
-import { rewarderContractName } from "components/Scheme/ContributionRewardExtRewarders/rewardersProps";
-import { GenericSchemeRegistry } from "genericSchemeRegistry";
 
 /**
  * gotta load moment in order to use moment-timezone directly
@@ -13,7 +11,6 @@ import "moment";
 import * as moment from "moment-timezone";
 
 import { getArc } from "../arc";
-import { splitCamelCase } from "lib/util";
 
 export enum SchemePermissions {
   None = 0,
@@ -86,60 +83,18 @@ export function isKnownScheme(address: Address) {
 }
 
 export function schemeName(scheme: ISchemeState|IContractInfo, fallback?: string) {
-  let name: string;
-  const contractInfo = (scheme as IContractInfo).alias ? scheme as IContractInfo : getArc().getContractInfo(scheme.address);
-
-  const alias = contractInfo?.alias;
-
-  if (scheme.name === "GenericScheme" || scheme.name === "UGenericScheme") {
-    if (alias && ((alias !== "GenericScheme") && (alias !== "UGenericScheme"))) {
-      name = alias;
-    } else if ((scheme as any).genericSchemeParams || ((scheme as any).uGenericSchemeParams)) {
-      const genericSchemeRegistry = new GenericSchemeRegistry();
-      let contractToCall;
-      const schemeState = scheme as ISchemeState;
-      if (schemeState.genericSchemeParams) {
-        contractToCall = schemeState.genericSchemeParams.contractToCall;
-      } else {
-        contractToCall = schemeState.uGenericSchemeParams.contractToCall;
-      }
-      const genericSchemeInfo = genericSchemeRegistry.getSchemeInfo(contractToCall);
-      if (genericSchemeInfo) {
-        name = genericSchemeInfo.specs.name;
-      } else {
-        // Adding the address is a bit long for a title
-        // name = `Blockchain Interaction (${contractToCall})`;
-        name = "Blockchain Interaction";
-      }
-    } else {
-      // this should never happen...
-      name = "Blockchain Interaction";
-    }
-  } else if (scheme.name === "ContributionReward") {
-    if (alias && (alias !== "ContributionReward")) {
-      name = alias;
-    } else {
-      name = "Funding and Voting Power";
-    }
-  } else if (scheme.name === "SchemeRegistrar") {
-    if (alias && (alias !== "SchemeRegistrar")) {
-      name = alias;
-    } else {
-      name = "Plugin Manager";
-    }
-  } else if (scheme.name) {
-    if (scheme.name === "ContributionRewardExt") {
-      /**
-       * this will be "pretty"
-       */
-      name = rewarderContractName(scheme as ISchemeState);
-    } else {
-      name = alias ?? splitCamelCase(scheme.name);
-    }
-  } else {
-    name = alias ?? fallback;
-  }
-  return name;
+  console.log(scheme.address, scheme.name)
+  const schemeNames: any = {
+    "0xc072171da83cce311e37bc1d168f54e6a6536df4": "DX Token Registry",
+    "0xb3ec6089556cca49549be01ff446cf40fa81c84d": "ENS Public Resolver",
+    "0x973ce4e81bdc3bd39f46038f3aaa928b04558b08": "ENS Registry",
+    "0xf050f3c6772ff35eb174a6900833243fccd0261f": "Plugin Manager",
+    "0x9cea0dd05c4344a769b2f4c2f8890eda8a700d64": "ENS Registry with Fallback",
+    "0x9a543aef934c21da5814785e38f9a7892d3cde6e": "ENSPublic Provider",
+    "0x199719ee4d5dcf174b80b80afa1fe4a8e5b0e3a0": "DutchX",
+    "0x08cc7bba91b849156e9c44ded51896b38400f55b": "Funding and Voting Power"
+  };
+  return schemeNames[scheme.address];
 }
 
 /**
@@ -194,7 +149,17 @@ const schemeActionPropNames = new Map<string, Map<GetSchemeIsActiveActions, stri
   ],
 ]);
 
+/**
+ * Returns true or false indicating whether the scheme is active and thus can accept new proposals.
+ * @param scheme Required parameter that if undefined or null will cause this method to throw an exception.
+ * @param action For SchemeRegistrar where we are asking specifically about Add and Remove actions.
+ */
 export function getSchemeIsActive(scheme: ISchemeState, action?: GetSchemeIsActiveActions): boolean {
+
+  if (!scheme) {
+    throw new Error("getSchemeIsActive: scheme parameter is not set");
+  }
+
   let votingMachineParamsPropertyName: string;
   let schemeName = scheme.name ? `${scheme.name[0].toLowerCase()}${scheme.name.slice(1)}` : "";
   if (schemeName === "genericScheme") {

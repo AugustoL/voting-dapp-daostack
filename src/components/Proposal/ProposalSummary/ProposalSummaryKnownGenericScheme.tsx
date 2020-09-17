@@ -95,7 +95,7 @@ export default class ProposalSummary extends React.Component<IProps> {
         <div className={css.summaryDetails}>
           Executing this proposal will call the function:
           <pre>{decodedCallData.action.abi.name}
-        ({decodedCallData.action.abi.inputs.map(this.inputHtml)})
+            ({decodedCallData.action.abi.inputs.map(this.inputHtml)})
           </pre>
           with values: <pre>{
             decodedCallData.values.map((value: string | Array<string>) => {

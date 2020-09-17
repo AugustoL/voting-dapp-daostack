@@ -255,7 +255,7 @@ class ActionButton extends React.Component<IProps, IState> {
                           onClick={this.handleClickRedeem}
                           data-test-id="button-redeem"
                         >
-                          <img src="/assets/images/Icon/redeem.svg" />
+                          <img src="assets/images/Icon/redeem.svg" />
                           {
                             (((beneficiaryNumUnredeemedCrRewards > 0) && (currentAccountAddress !== proposalState.contributionReward.beneficiary)) &&
                            (currentAccountNumUnredeemedGpRewards === 0)) ?

@@ -24,7 +24,7 @@ import { IProfileState } from "reducers/profilesReducer";
 import { combineLatest, of } from "rxjs";
 import Loading from "components/Shared/Loading";
 import * as css from "./Account.scss";
-import { genName, formatTokens, baseTokenName, ethErrorHandler } from "lib/util";
+import { genName, formatTokens, baseTokenName, ethErrorHandler, ethBalance } from "lib/util";
 
 type IExternalProps = RouteComponentProps<any>;
 
@@ -318,7 +318,7 @@ const SubscribedAccountProfilePage = withSubscription({
       // subscribe if only to to get DAO reputation supply updates
       daoAvatarAddress ? dao.state( {subscribe: true}) : of(null),
       daoAvatarAddress ? dao.member(accountAddress).state() : of(null),
-      arc.ethBalance(accountAddress)
+      ethBalance(accountAddress)
         .pipe(ethErrorHandler()),
       arc.GENToken().balanceOf(accountAddress)
         .pipe(ethErrorHandler())
