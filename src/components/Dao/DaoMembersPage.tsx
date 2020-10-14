@@ -2,7 +2,6 @@ import { IDAOState, Member } from "@daostack/arc.js";
 import { getProfile } from "actions/profilesActions";
 import Loading from "components/Shared/Loading";
 import withSubscription, { ISubscriptionProps } from "components/Shared/withSubscription";
-import daoConfig from "../../DAOConfig";
 
 import * as React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -11,6 +10,7 @@ import { RouteComponentProps } from "react-router-dom";
 import * as Sticky from "react-stickynode";
 import { IRootState } from "reducers";
 import { IProfilesState } from "reducers/profilesReducer";
+import { fromWei } from "lib/util";
 
 import DaoMember from "./DaoMember";
 import * as css from "./Dao.scss";
@@ -66,7 +66,10 @@ class DaoMembersPage extends React.Component<IProps, null> {
     return (
       <div className={css.membersContainer}>
         <Sticky enabled top={50} innerZ={10000}>
-          <h2>{daoConfig.daoName} Members</h2>
+          <h2>
+            DXdao Members - Total {fromWei(daoTotalReputation).toLocaleString(
+            'de-DE', {minimumFractionDigits: 0, maximumFractionDigits: 0})} REP
+          </h2>
         </Sticky>
         <table className={css.memberHeaderTable}>
           <tbody className={css.memberTable + " " + css.memberTableHeading}>

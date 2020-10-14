@@ -41,6 +41,7 @@ interface IExternalProps {
   history: History;
   scheme: ISchemeState;
   daoState: IDAOState;
+  isWikiScheme: boolean;
   crxRewarderProps: any;
 }
 
@@ -96,7 +97,7 @@ class SchemeProposalsPreboosted extends React.Component<IPropsPreBoosted, null> 
           {proposalsPreBoosted.length === 0
             ?
             <div>
-              <img src="/assets/images/yoga.svg" />
+              <img src="assets/images/yoga.svg" />
             </div>
             : " "
           }
@@ -185,7 +186,7 @@ class SchemeProposalsQueued extends React.Component<IPropsQueued, null> {
           {proposalsQueued.length === 0
             ?
             <div>
-              <img src="/assets/images/yoga.svg" />
+              <img src="assets/images/yoga.svg" />
             </div>
             : " "
           }
@@ -250,8 +251,9 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
   public render(): RenderOutput {
     const { data } = this.props;
 
+
     const [proposalsBoosted, allProposals ] = data;
-    const { currentAccountAddress, daoState, scheme } = this.props;
+    const { currentAccountAddress, daoState, scheme, isWikiScheme } = this.props;
     let proposalCount=0;
 
     const boostedProposalsHTML = (
@@ -276,12 +278,21 @@ class SchemeProposalsPage extends React.Component<IProps, null> {
             <div className={css.proposalsHeader}>
               No upcoming proposals
             </div>
+              <>
             <p>You can be the first one to create a {schemeFriendlyName} proposal today! :)</p>
             <div className={css.cta}>
               <Link to={"/dao"}>
                 <img className={css.relax} src="assets/images/lt.svg"/> Back to plugins
               </Link>
             </div>
+                  {
+                    isWikiScheme && (
+                      <Link to={"/dao/" + daoState.address + "/wiki"}>
+                          Go to wiki
+                      </Link>
+                    )
+                  }
+              </>
           </div>
           :
           <div>

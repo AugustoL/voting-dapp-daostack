@@ -92,7 +92,7 @@ body {
   color: $white;
   position: relative;
   vertical-align: middle;
-  right: 10px;
+  right: 0px;
 
   img {
     height: 12px;
@@ -217,7 +217,8 @@ body {
   }
 
   .accountInfo {
-    position: relative;
+    position: fixed;
+    right: 10px;
     display: inline-block;
     text-align: center;
     width: auto;
@@ -528,7 +529,7 @@ body {
     }
 
     &.noAccount {
-      margin-right: 10px;
+      margin-right: 0px;
       opacity: 0.5;
     }
   }

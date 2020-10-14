@@ -1,0 +1,1 @@
+export const reactTagsContainer: string;

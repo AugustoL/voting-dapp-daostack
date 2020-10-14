@@ -76,7 +76,7 @@ class SimpleMessagePopup extends React.Component<IDispatchProps & IStateProps, n
           header={
             <div className={css.modalHeader}>
               <div className={css.title}>{this.props.options.title ?? "Alchemy"}</div>
-              <div className={css.closeButtonX} onClick={this.closeHandler}><img src={"/assets/images/Icon/close-grey.svg"} />
+              <div className={css.closeButtonX} onClick={this.closeHandler}><img src={"assets/images/Icon/close-grey.svg"} />
               </div>
             </div>
           }

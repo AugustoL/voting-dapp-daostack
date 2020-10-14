@@ -111,14 +111,14 @@ export default class SchemeInfo extends React.Component<IProps, null> {
         <h3>{schemeName(scheme, scheme.address)}</h3>
         <div className={css.infoCardContent}>
           <div className={css.infoRowsContainer}>
-            <div>Address of plugin: <a href={linkToEtherScan(scheme.address)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></div>
+            <div>Address of plugin: <a href={linkToEtherScan(scheme.address)} target="_blank" rel="noopener noreferrer"><img src="assets/images/Icon/Link-blue.svg" /></a></div>
             <div>
               <div className={css.addressHash}>{scheme.address}</div>
               <CopyToClipboard value={scheme.address} />
             </div>
             { scheme.genericSchemeParams ?
               <>
-                <div>will call this contract: <a href={linkToEtherScan(scheme.genericSchemeParams.contractToCall)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></div>
+                <div>will call this contract: <a href={linkToEtherScan(scheme.genericSchemeParams.contractToCall)} target="_blank" rel="noopener noreferrer"><img src="assets/images/Icon/Link-blue.svg" /></a></div>
                 <div>
                   <div className={css.addressHash}>{scheme.genericSchemeParams.contractToCall}</div>
                   <CopyToClipboard value={scheme.genericSchemeParams.contractToCall} />
@@ -127,7 +127,7 @@ export default class SchemeInfo extends React.Component<IProps, null> {
             }
             { scheme.uGenericSchemeParams ?
               <>
-                <div>will call this contract: <a href={linkToEtherScan(scheme.uGenericSchemeParams.contractToCall)} target="_blank" rel="noopener noreferrer"><img src="/assets/images/Icon/Link-blue.svg" /></a></div>
+                <div>will call this contract: <a href={linkToEtherScan(scheme.uGenericSchemeParams.contractToCall)} target="_blank" rel="noopener noreferrer"><img src="assets/images/Icon/Link-blue.svg" /></a></div>
                 <div>
                   <div className={css.addressHash}>{scheme.uGenericSchemeParams.contractToCall}</div>
                   <CopyToClipboard value={scheme.uGenericSchemeParams.contractToCall} />

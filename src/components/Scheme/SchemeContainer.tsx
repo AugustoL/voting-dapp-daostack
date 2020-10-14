@@ -68,6 +68,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
     };
   }
 
+  private isWikiScheme = schemeName(this.props.data[0], this.props.data[0].address) === "underscore protocol"
   private schemeInfoPageHtml = (props: any) => <SchemeInfoPage {...props} daoState={this.props.daoState} scheme={this.props.data[0]} schemeManager={this.props.data[1]} />;
   private schemeProposalsPageHtml = (isActive: boolean, crxRewarderProps: ICrxRewarderProps) => (props: any) =>
     <SchemeProposalsPage {...props}
@@ -77,7 +78,8 @@ class SchemeContainer extends React.Component<IProps, IState> {
        */
       daoState={this.props.daoState}
       currentAccountAddress={this.props.currentAccountAddress}
-      scheme={this.props.data[0]}crxRewarderProps={crxRewarderProps} />;
+      scheme={this.props.data[0]}crxRewarderProps={crxRewarderProps} 
+      isWikiScheme={this.isWikiScheme} />;
   private contributionsRewardExtTabHtml = () => (props: any) =>
   {
     if (!this.state.crxListComponent) {
@@ -165,7 +167,6 @@ class SchemeContainer extends React.Component<IProps, IState> {
           </h2>
 
           <div className={css.schemeMenu}>
-
             <div className={css.row}>
               <div className={css.tabs}>
 
@@ -195,7 +196,7 @@ class SchemeContainer extends React.Component<IProps, IState> {
                 }
               </div>
 
-              { isProposalScheme ?
+              { isProposalScheme && !this.isWikiScheme  ?
                 inInfoTab ?
                   <div className={css.editPlugin}>
                     <TrainingTooltip placement="topRight" overlay={"A small amount of ETH is necessary to submit a proposal in order to pay gas costs"}>

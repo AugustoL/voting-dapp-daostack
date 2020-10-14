@@ -9,6 +9,7 @@ import * as css from "./ProposalSummary.scss";
 import ProposalSummaryDutchX from "./ProposalSummaryDutchX";
 import ProposalSummaryStandardBounties from "./ProposalSummaryStandardBounties";
 import ProposalSummaryCO2ken from "./ProposalSummaryCO2ken";
+import ProposalSummaryWiki from "./ProposalSummaryWiki";
 
 interface IExternalProps {
   beneficiaryProfile?: IProfileState;
@@ -48,7 +49,10 @@ export default class ProposalSummary extends React.Component<IProps> {
       return <ProposalSummaryStandardBounties {...this.props} />;
     } else if (genericSchemeInfo.specs.name === "CO2ken") {
       return <ProposalSummaryCO2ken {...this.props} />;
+    } else if (genericSchemeInfo.specs.name === "WikiUpdate") {
+      return <ProposalSummaryWiki {...this.props} />;
     }
+
     const proposalSummaryClass = classNames({
       [css.detailView]: detailView,
       [css.transactionModal]: transactionModal,
@@ -95,7 +99,7 @@ export default class ProposalSummary extends React.Component<IProps> {
         <div className={css.summaryDetails}>
           Executing this proposal will call the function:
           <pre>{decodedCallData.action.abi.name}
-        ({decodedCallData.action.abi.inputs.map(this.inputHtml)})
+            ({decodedCallData.action.abi.inputs.map(this.inputHtml)})
           </pre>
           with values: <pre>{
             decodedCallData.values.map((value: string | Array<string>) => {

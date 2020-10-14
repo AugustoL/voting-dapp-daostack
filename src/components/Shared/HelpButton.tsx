@@ -26,7 +26,7 @@ export default class HelpButton extends React.Component<IProps, null> {
          * image is from: https://commons.wikimedia.org/wiki/File:Ambox_question.svg
          */
         }
-        <img className={css.image} src="/assets/images/Icon/question-help.svg" />
+        <img className={css.image} src="assets/images/Icon/question-help.svg" />
       </Tooltip>
     );
   }

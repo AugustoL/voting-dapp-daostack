@@ -14,15 +14,12 @@ import { parse } from "query-string";
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link, matchPath, RouteComponentProps } from "react-router-dom";
-import Toggle from "react-toggle";
 import { RefObject } from "react";
 import classNames from "classnames";
 import { Address, IDAOState } from "@daostack/arc.js";
 import { ETHDENVER_OPTIMIZATION } from "../settings";
 import * as css from "./App.scss";
 import ProviderConfigButton from "layouts/ProviderConfigButton";
-import { fromWei } from "lib/util";
-
 
 interface IExternalProps extends RouteComponentProps<any> {
 }
@@ -99,12 +96,16 @@ class Header extends React.Component<IProps, null> {
   private toggleDiv: RefObject<HTMLDivElement>;
 
   public componentDidMount() {
-    this.toggleDiv.current.onmouseenter = (_ev: MouseEvent) => {
-      this.props.enableTrainingTooltipsShowAll();
-    };
-    this.toggleDiv.current.onmouseleave = (_ev: MouseEvent) => {
-      this.props.disableTrainingTooltipsShowAll();
-    };
+    if (this.toggleDiv.current) {
+      this.toggleDiv.current.onmouseenter = (_ev: MouseEvent) => {
+        this.props.enableTrainingTooltipsShowAll();
+      };
+      this.toggleDiv.current.onmouseleave = (_ev: MouseEvent) => {
+        this.props.disableTrainingTooltipsShowAll();
+      };
+    }
+
+    this.setState({ alchemyVersion: PACKAGE_VERSION ?? "Not found" });
   }
 
   public handleClickLogin = async (_event: any): Promise<void> => {
@@ -128,17 +129,6 @@ class Header extends React.Component<IProps, null> {
 
   private handleToggleMenu = (_event: any): void => {
     this.props.toggleMenu();
-  }
-
-  private handleTrainingTooltipsEnabled = (event: any): void => {
-    /**
-     * maybe making this asynchronous can address reports of the button responding very slowly
-     */
-    const checked = event.target.checked;
-    setTimeout(() => {
-      localStorage.setItem(Header.trainingTooltipsEnabledKey, checked);
-      this.props.toggleTrainingTooltipsOnHover();
-    }, 0);
   }
 
   private getTrainingTooltipsEnabled(): boolean {
@@ -166,7 +156,6 @@ class Header extends React.Component<IProps, null> {
     const accountIsEnabled = getAccountIsEnabled();
     const web3ProviderInfo = getWeb3ProviderInfo();
     const web3Provider = getWeb3Provider();
-    const trainingTooltipsOn = this.getTrainingTooltipsEnabled();
 
     return (
       <div className={css.headerContainer}>
@@ -188,23 +177,14 @@ class Header extends React.Component<IProps, null> {
             <span>|</span>
             <Link to={"/dao/members"}>Members</Link>
             <span>|</span>
+            <Link to={"/dao/wiki"}>Wiki</Link>
+            <span>|</span>
             <Link to={"/dao/schemes"}>Proposals</Link>
             <span>|</span>
-            <a href={"https://etherscan.io/tokenholdings?a="+process.env.DAO_AVATAR_ADDRESS}>Holdings</a>
+            <Link to={"/dao/manifesto"}>Manifesto</Link>
             <span>|</span>
-            <a>
-              {fromWei(dao.reputationTotalSupply).toLocaleString(
-                undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2})} REP
-            </a>
+            <a target="_blank" href={"https://etherscan.io/tokenholdings?a="+process.env.DAO_AVATAR_ADDRESS}>Treasury</a>
           </div>
-          <TrainingTooltip placement="left" overlay={"Show / hide tooltips on hover"} alwaysAvailable>
-            <div className={css.toggleButton} ref={this.toggleDiv}>
-              <Toggle
-                defaultChecked={trainingTooltipsOn}
-                onChange={this.handleTrainingTooltipsEnabled}
-                icons={{ checked: <img src='assets/images/Icon/checked.svg'/>, unchecked: <img src='assets/images/Icon/unchecked.svg'/> }}/>
-            </div>
-          </TrainingTooltip>
           <div className={css.accountInfo}>
             { currentAccountAddress ?
               <span>

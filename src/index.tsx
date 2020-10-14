@@ -5,10 +5,23 @@ import { init as sentryInit } from "@sentry/browser";
 import * as React from "react";
 import { render } from "react-dom";
 import { AppContainer } from "react-hot-loader";
+import UprtclOrchestrator from "./UprtclOrchestrator";
 
 import { App } from "./App";
 
 import "./assets/styles/global.scss";
+
+/** The UprtclOrchestrator register the web-components of the _Prtcl Wiki
+ *  and prepares the services needed by the _Prtcl infrastructure */
+export const uprtcl = UprtclOrchestrator.getInstance();
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
 
 async function renderApp() {
   // Add icons we want to use from FontAwesome
@@ -20,6 +33,8 @@ async function renderApp() {
       environment: process.env.NODE_ENV,
     });
   }
+
+  await uprtcl.load();
 
   render(
     <AppContainer>

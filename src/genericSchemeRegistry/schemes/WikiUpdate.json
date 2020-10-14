@@ -1,0 +1,125 @@
+{
+  "name": "WikiUpdate",
+  "addresses": {
+    "main": [ "" ],
+    "rinkeby": [ "0xC9D3cff8e7C648d655321D03B4456b2a1c62692b" ],
+    "kovan": ["0xb1db4a5e4c35727eec8e6285cddf1844cd71027c"],
+    "private": [
+      "0xA10f1c26d7D4BCB1a93F84652177D2E2b320378B",
+      "0xdbD6fB1F0E9CB1282d13DF95C2cA5Eb6377e984B"
+    ]
+  },
+  "actions": [ 
+    {
+      "id": "authorizeProposal",
+      "label": "Authorize Wiki Merge",
+      "description": "Authorize Wiki Merge",
+      "fields": [ ],
+      "abi": {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "proposalId",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint8",
+            "name": "authorized",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "execute",
+            "type": "bool"
+          }
+        ],
+        "name": "authorizeProposal",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    }, {
+      "id": "setHomePerspective",
+      "label": "Set home perspective",
+      "description": "This allow the wiki to set the home perspective",
+      "fields": [ ],
+      "abi": {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "perspectiveId",
+            "type": "string"
+          }
+        ],
+        "name": "setHomePerspective",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    }, {
+      "id": "changeOwner",
+      "label": "Change owner of Wiki",
+      "fields": [ ],
+      "abi": {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "perspectiveIdHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "changePerspectiveOwner",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    }, {
+      "id": "setPerspectiveDetails",
+      "label": "Set perspective details",
+      "fields": [],
+      "abi":   {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "perspectiveIdHash",
+            "type": "bytes32"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "context",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct SharedPerspectiveDetails.PerspectiveDetails",
+            "name": "newDetails",
+            "type": "tuple"
+          }
+        ],
+        "name": "setPerspectiveDetails",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    }
+  ]
+}

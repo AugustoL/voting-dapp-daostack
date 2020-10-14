@@ -1,0 +1,16 @@
+.manifestoPage {
+  position: fixed;
+  top: 50px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  iframe {
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+  }
+}
